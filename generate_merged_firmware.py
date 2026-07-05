@@ -133,17 +133,17 @@ def generate_merged_firmware(target, source, env):
         "custom_firmware_name",
         os.path.basename(project_dir),
     )
-    firmware_target = get_project_option("custom_firmware_target")
-    if firmware_target is None:
-        firmware_target = env.subst("$PIOENV")
-    firmware_suffix = get_project_option("custom_firmware_suffix", "bin")
-    firmware_version = resolve_version()
     firmware_env = get_project_option("custom_firmware_env")
     if firmware_env is None:
         firmware_env = pioenv
-    output_filename = "{name}_{env}_firmware_{version}.{suffix}".format(
+    firmware_target = get_project_option("custom_firmware_target")
+    if firmware_target is None:
+        firmware_target = firmware_env
+    firmware_suffix = get_project_option("custom_firmware_suffix", "bin")
+    firmware_version = resolve_version()
+    output_filename = "{name}_{target}_firmware_{version}.{suffix}".format(
         name=sanitize_project_name(firmware_name),
-        env=sanitize_filename_part(firmware_env),
+        target=sanitize_filename_part(firmware_target),
         version=sanitize_filename_part(firmware_version),
         suffix=sanitize_filename_part(firmware_suffix),
     )

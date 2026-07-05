@@ -84,22 +84,24 @@ pio run -t firmware
 必要に応じて、プロジェクト側の `platformio.ini` にカスタムオプションを指定します。
 
 ```ini
-[env]
+[env:m5stack-basic]
 custom_firmware_dir = firmware
 custom_firmware_name = example
-custom_firmware_env = ${this.__env__}
+custom_firmware_target = m5stack-basic
+# custom_firmware_env = ${this.__env__}
 custom_firmware_suffix = bin
 ```
 
 ## カスタムオプション
 
-| オプション | 説明 | 省略時 |
-|---|---|---|
-| `custom_firmware_dir` | 生成したファームウェアを出力するディレクトリです。相対パスの場合はプロジェクトルートからの相対パスとして扱われます。 | `firmware` |
-| `custom_firmware_name` | 出力ファイル名に含めるファームウェア名です。 | プロジェクトディレクトリ名 |
-| `custom_firmware_env` | 出力ファイル名に含める環境名です。 | PlatformIOの環境名 |
-| `custom_firmware_suffix` | 出力ファイルの拡張子です。 | `bin` |
-| `custom_firmware_dependencies` | `firmware` ターゲット実行前に追加で依存させるターゲットやファイルを指定します。 | なし |
+| オプション                     | 説明                                                                                                                 | 省略時                     |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `custom_firmware_dir`          | 生成したファームウェアを出力するディレクトリです。相対パスの場合はプロジェクトルートからの相対パスとして扱われます。 | `firmware`                 |
+| `custom_firmware_name`         | 出力ファイル名に含めるファームウェア名です。                                                                         | プロジェクトディレクトリ名 |
+| `custom_firmware_target`       | 出力ファイル名に含めるターゲット名です。                                                                             | `custom_firmware_env`の値  |
+| `custom_firmware_env`          | 出力ファイル名に含める環境名です。                                                                                   | PlatformIOの環境名         |
+| `custom_firmware_suffix`       | 出力ファイルの拡張子です。                                                                                           | `bin`                      |
+| `custom_firmware_dependencies` | `firmware` ターゲット実行前に追加で依存させるターゲットやファイルを指定します。                                      | なし                       |
 
 ## バージョン指定
 
@@ -181,14 +183,14 @@ custom_firmware_flash_size = 16MB
 生成されるファームウェアのファイル名は、次の形式になります。
 
 ```text
-{name}_{env}_firmware_{version}.{suffix}
+{name}_{target}_firmware_{version}.{suffix}
 ```
 
 例えば、次の設定の場合:
 
 ```ini
 custom_firmware_name = example
-custom_firmware_env = m5stack-basic
+custom_firmware_target = m5stack-basic
 custom_firmware_version = v1.0.0
 custom_firmware_suffix = bin
 ```
