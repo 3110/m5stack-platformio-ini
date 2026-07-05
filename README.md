@@ -9,7 +9,7 @@ M5Stack向けのPlatformIO設定をまとめた共通INIファイルです。
 プロジェクトにsubmoduleとして追加します。
 
 ```sh
-git submodule add https://github.com/3110/m5stack-platformio-ini.git config/m5stack-platformio-ini
+git submodule add https://github.com/3110/m5stack-platformio-ini.git config
 ```
 
 プロジェクト側の `platformio.ini` で、次のように指定します。
@@ -17,7 +17,7 @@ git submodule add https://github.com/3110/m5stack-platformio-ini.git config/m5st
 ```ini
 [platformio]
 extra_configs =
-  config/m5stack-platformio-ini/platformio-m5stack.ini
+  config/platformio-m5stack.ini
 ```
 
 ## タグを指定して使用する場合
@@ -25,11 +25,11 @@ extra_configs =
 安定した設定を使いたい場合は、submoduleを特定のタグに固定できます。
 
 ```sh
-cd config/m5stack-platformio-ini
+cd config
 git checkout v1.0.0
 
 cd ../..
-git add .gitmodules config/m5stack-platformio-ini
+git add .gitmodules config
 git commit -m "Add m5stack PlatformIO config"
 ```
 
@@ -40,17 +40,17 @@ git commit -m "Add m5stack PlatformIO config"
 最新版に更新する場合は、次のようにします。
 
 ```sh
-git submodule update --remote config/m5stack-platformio-ini
+git submodule update --remote config
 ```
 
 別のタグに更新する場合は、submodule内でタグをcheckoutしてから、親リポジトリ側でsubmoduleの参照先をコミットします。
 
 ```sh
-cd config/m5stack-platformio-ini
+cd config
 git fetch --tags
 git checkout v1.0.0
 
-cd ../..
-git add config/m5stack-platformio-ini
+cd ..
+git add config
 git commit -m "Update m5stack PlatformIO config to v1.0.0"
 ```
